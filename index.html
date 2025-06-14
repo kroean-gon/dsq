@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>식단 로또 추첨기</title>
+  <style>
+    body {
+      font-family: 'Malgun Gothic', sans-serif;
+      background: linear-gradient(to bottom, #d2f1ff, #f4fff4);
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+    }
+    #ball {
+      width: 180px;
+      height: 180px;
+      background-color: #27ae60;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 40px auto;
+      transition: transform 0.2s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      padding: 20px;
+      text-align: center;
+    }
+    #result {
+      font-size: 1.5rem;
+      color: #34495e;
+      margin-top: 30px;
+      min-height: 80px;
+    }
+    button {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #1c5980;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍎 식단 로또 추첨기</h1>
+  <div id="ball">돌려볼까?</div>
+  <button onclick="startLotto()">🎲 챌린지 뽑기!</button>
+  <div id="result"></div>
+
+  <script>
+    const challenges = ["챌린지 1","챌린지 2","챌린지 3","챌린지 4","챌린지 5","챌린지 6","챌린지 7","챌린지 8","챌린지 9","챌린지 10","챌린지 11","챌린지 12","챌린지 13","챌린지 14","챌린지 15","챌린지 16","챌린지 17","챌린지 18","챌린지 19","챌린지 20","챌린지 21","챌린지 22","챌린지 23","챌린지 24","챌린지 25","챌린지 26","챌린지 27","챌린지 28","챌린지 29","챌린지 30","챌린지 31","챌린지 32","챌린지 33","챌린지 34","챌린지 35","챌린지 36","챌린지 37","챌린지 38","챌린지 39","챌린지 40","챌린지 41","챌린지 42","챌린지 43","챌린지 44","챌린지 45","챌린지 46","챌린지 47","챌린지 48","챌린지 49","챌린지 50","챌린지 51","챌린지 52","챌린지 53","챌린지 54","챌린지 55","챌린지 56","챌린지 57","챌린지 58","챌린지 59","챌린지 60","챌린지 61","챌린지 62","챌린지 63","챌린지 64","챌린지 65","챌린지 66","챌린지 67","챌린지 68","챌린지 69","챌린지 70","챌린지 71","챌린지 72","챌린지 73","챌린지 74","챌린지 75","챌린지 76","챌린지 77","챌린지 78","챌린지 79","챌린지 80","챌린지 81","챌린지 82","챌린지 83","챌린지 84","챌린지 85","챌린지 86","챌린지 87","챌린지 88","챌린지 89","챌린지 90","챌린지 91","챌린지 92","챌린지 93","챌린지 94","챌린지 95","챌린지 96","챌린지 97","챌린지 98","챌린지 99","챌린지 100"];
+    function startLotto() {
+      const ball = document.getElementById("ball");
+      const result = document.getElementById("result");
+      result.innerHTML = "";
+      let count = 0;
+      const interval = setInterval(() => {
+        const random = challenges[Math.floor(Math.random() * challenges.length)];
+        ball.textContent = random;
+        ball.style.transform = `rotate(${count * 20}deg)`;
+        count++;
+      }, 80);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        const final = challenges[Math.floor(Math.random() * challenges.length)];
+        ball.textContent = "✨ 당첨! ✨";
+        result.innerHTML = `<strong>🌟 오늘의 챌린지:</strong><br/><span style='font-size:1.4rem'>"\${final}"</span>`;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

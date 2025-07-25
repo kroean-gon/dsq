@@ -98,7 +98,7 @@ const challenges = [
 ];
 
 let balls = [];
-let drawn = false;
+let isDrawn = false;
 
 function createBall(i) {
   const ball = document.createElement('div');
@@ -116,11 +116,11 @@ function clearBalls() {
 }
 
 function startLotto() {
-  if (drawn) return;
-  drawn = true;
+  if (isDrawn) return;
+  isDrawn = true;
 
   clearBalls();
-  mainBall.style.display = 'none';
+  mainBall.classList.remove('show');
   resultBox.innerHTML = '';
 
   for (let i = 0; i < 20; i++) {
@@ -132,7 +132,9 @@ function startLotto() {
     const index = Math.floor(Math.random() * challenges.length);
     const text = challenges[index];
     mainBall.innerText = text;
-    mainBall.style.display = 'flex';
-    resultBox.innerHTML = `<strong>🎯 오늘의 챌린지:</strong><br>“${text}”`;
+    mainBall.classList.add('show');
+    resultBox.innerHTML = `<strong>🌿 오늘의 챌린지:</strong><br>“${text}”`;
+
+    drawBtn.disabled = true;
+    drawBtn.innerText = '✅ 추첨 완료!';
   }, 1500);
-}

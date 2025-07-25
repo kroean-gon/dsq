@@ -1,9 +1,9 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 0 80px 0;  /* 아래쪽 여백 80px 추가 */
   font-family: 'Arial', sans-serif;
   background: linear-gradient(to bottom, #f0fff0, #ffffff);
-  overflow: hidden;
+  overflow-x: hidden; /* 세로 스크롤은 허용 */
   text-align: center;
 }
 
@@ -92,6 +92,7 @@ button:hover:enabled {
 
 #result {
   margin-top: 20px;
+  margin-bottom: 60px;  /* 추가된 여백 */
   font-size: 1.2rem;
   color: #1b5e20;
 }

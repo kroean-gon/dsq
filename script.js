@@ -138,3 +138,4 @@ function startLotto() {
     drawBtn.disabled = true;
     drawBtn.innerText = '✅ 추첨 완료!';
   }, 1500);
+}

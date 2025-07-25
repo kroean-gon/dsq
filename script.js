@@ -135,8 +135,9 @@ function startLotto() {
     mainBall.innerText = text;
     mainBall.classList.add('show');
     resultBox.innerHTML = `<strong>🌿 오늘의 챌린지:</strong><br>“${text}”`;
+  📸 <strong>이 화면을 캡처해서 단톡방에 올려주세요!</strong>
+  `;
 
-    drawBtn.disabled = true;
-    drawBtn.innerText = '✅ 추첨 완료!';
-  }, 1500);
-}
+  drawBtn.disabled = true;
+  drawBtn.innerText = '✅ 추첨 완료!';
+}, 1500);

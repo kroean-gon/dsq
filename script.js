@@ -128,15 +128,22 @@ function startLotto() {
     createBall(i);
   }
 
-  setTimeout(() => {
-    clearBalls();
-    const index = Math.floor(Math.random() * challenges.length);
-    const text = challenges[index];
-    mainBall.innerText = text;
-    mainBall.classList.add('show');
-    resultBox.innerHTML = <strong>🌿 오늘의 챌린지:</strong><br>“${text}”;
+ setTimeout(() => {
+        clearBalls();
+        const index = Math.floor(Math.random() * challenges.length);
+        const text = challenges[index];
+        mainBall.innerText = text;
+        mainBall.classList.add('show');
+        resultBox.innerHTML = `
+          <strong>🌿 오늘의 챌린지:</strong><br>
+          “${text}”<br><br>
+          📸 <strong>이 화면을 캡처해서 단톡방에 올려주세요!</strong>
+        `;
+        drawBtn.disabled = true;
+        drawBtn.innerText = '✅ 추첨 완료!';
+      }, 1500);
+    }
+  </script>
 
-    drawBtn.disabled = true;
-    drawBtn.innerText = '✅ 추첨 완료!';
-  }, 1500);
-}
+</body>
+</html>

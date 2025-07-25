@@ -1,6 +1,7 @@
 const container = document.getElementById('ball-container');
 const mainBall = document.getElementById('main-ball');
 const resultBox = document.getElementById('result');
+const drawBtn = document.getElementById('drawBtn'); // 버튼 요소 연결
 
 const challenges = [
   "주말 외식 대신 만든 식사 한 끼 먹기",

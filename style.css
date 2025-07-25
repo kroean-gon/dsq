@@ -39,11 +39,12 @@ h1 {
   100% { transform: translate(300px, 500px); }
 }
 
+/* 대포 발사 느낌 */
 #main-ball {
   position: fixed;
   left: 50%;
-  bottom: -200px;
-  transform: translateX(-50%) scale(0.5);
+  bottom: -150px;
+  transform: translateX(-50%) translateY(50%) scale(0.3);
   width: 160px;
   height: 160px;
   border-radius: 50%;
@@ -58,13 +59,13 @@ h1 {
   line-height: 1.3;
   word-break: keep-all;
   opacity: 0;
-  transition: bottom 0.8s ease-out, transform 0.8s ease-out, opacity 0.3s ease-in;
   z-index: 10;
+  transition: all 0.8s ease-out;
 }
 
 #main-ball.show {
   bottom: 40%;
-  transform: translateX(-50%) scale(1.2);
+  transform: translateX(-50%) translateY(0) scale(1.2);
   opacity: 1;
 }
 
@@ -94,4 +95,3 @@ button:hover:enabled {
   font-size: 1.2rem;
   color: #1b5e20;
 }
-

@@ -96,3 +96,43 @@ const challenges = [
   "음식 색감 다양하게 구성해 본 식단 인증하기",
   "하루 식단 총평과 함께 BEST 컷 공유하기"
 ];
+
+let balls = [];
+let drawn = false;
+
+function createBall(i) {
+  const ball = document.createElement('div');
+  ball.classList.add('ball');
+  ball.innerText = i + 1;
+  ball.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+  ball.style.top = Math.random() * (window.innerHeight * 0.6 - 60) + 'px';
+  container.appendChild(ball);
+  balls.push(ball);
+}
+
+function clearBalls() {
+  balls.forEach(ball => container.removeChild(ball));
+  balls = [];
+}
+
+function startLotto() {
+  if (drawn) return;
+  drawn = true;
+
+  clearBalls();
+  mainBall.style.display = 'none';
+  resultBox.innerHTML = '';
+
+  for (let i = 0; i < 20; i++) {
+    createBall(i);
+  }
+
+  setTimeout(() => {
+    clearBalls();
+    const index = Math.floor(Math.random() * challenges.length);
+    const text = challenges[index];
+    mainBall.innerText = text;
+    mainBall.style.display = 'flex';
+    resultBox.innerHTML = `<strong>🎯 오늘의 챌린지:</strong><br>“${text}”`;
+  }, 1500);
+}

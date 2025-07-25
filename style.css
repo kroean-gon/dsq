@@ -1,83 +1,58 @@
 body {
   margin: 0;
-  padding: 0 0 80px 0;  /* 아래쪽 여백 80px 추가 */
+  padding: 0;
   font-family: 'Arial', sans-serif;
   background: linear-gradient(to bottom, #f0fff0, #ffffff);
-  overflow-x: hidden; /* 세로 스크롤은 허용 */
   text-align: center;
-}
-
-h1 {
-  margin-top: 30px;
-  font-size: 2rem;
-  color: #2e7d32;
-}
-
-#ball-container {
-  position: relative;
-  width: 100vw;
-  height: 60vh;
+  height: 100vh; /* 전체 콘텐츠를 한 화면에 맞추기 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
+h1 {
+  font-size: 1.5rem;
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+#ball-container {
+  display: none; /* 필요 시 켜세요 */
+}
+
 .ball {
-  width: 60px;
-  height: 60px;
-  background-color: #4caf50;
-  border-radius: 50%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  animation: float 10s linear infinite;
+  display: none; /* 현재 사용 안 함 */
 }
 
-@keyframes float {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(300px, 500px); }
-}
-
-/* 대포 발사 느낌 */
 #main-ball {
-  position: fixed;
-  left: 50%;
-  bottom: -150px;
-  transform: translateX(-50%) translateY(50%) scale(0.3);
   width: 160px;
   height: 160px;
-  border-radius: 50%;
   background-color: #2e7d32;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 14px;
   line-height: 1.3;
   word-break: keep-all;
-  opacity: 0;
-  z-index: 10;
-  transition: all 0.8s ease-out;
-}
-
-#main-ball.show {
-  bottom: 40%;
-  transform: translateX(-50%) translateY(0) scale(1.2);
-  opacity: 1;
+  box-sizing: border-box;
+  margin-bottom: 15px;
 }
 
 button {
-  padding: 12px 24px;
-  font-size: 1.2rem;
+  padding: 10px 20px;
+  font-size: 1rem;
   background: #388e3c;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-bottom: 12px;
 }
 
 button:disabled {
@@ -91,8 +66,18 @@ button:hover:enabled {
 }
 
 #result {
-  margin-top: 20px;
-  margin-bottom: 60px;  /* 추가된 여백 */
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #1b5e20;
+  margin-bottom: 10px;
+}
+
+.challenge-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.notice {
+  font-size: 0.85rem;
+  margin-top: 4px;
 }

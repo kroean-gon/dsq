@@ -1,68 +1,64 @@
-import * as THREE from 'https://cdn.skypack.dev/three';
-import { OrbitControls } from 'https://cdn.skypack.dev/three/examples/jsm/controls/OrbitControls';
+const container = document.getElementById('ball-container');
+const mainBall = document.getElementById('main-ball');
+const resultBox = document.getElementById('result');
+const drawBtn = document.getElementById('draw-btn');
 
-let scene = new THREE.Scene();
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-let renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+const challenges = [
+  "오늘 먹은 단백질 음식 인증샷 올리기", "아침 식사 사진 올리기", "채소가 3가지 이상 포함된 식사 올리기",
+  "탄수화물 없이 한 끼 먹기", "정제당 없는 하루 인증", "오늘의 물 2L 완료 인증",
+  "직접 요리한 식단 사진 올리기", "외식 대신 집밥 인증", "하루 총 3끼 인증샷 모아 올리기",
+  "고구마 or 단호박으로 식사 인증", "샐러드 먹은 사진 올리기", "반찬 3가지 이하로 구성한 식단",
+  "단백질 80g 채우기 인증", "냉장고 털이 식단 공유하기", "오늘 먹은 견과류 인증",
+  "무가당 두유 or 콩물 마신 사진", "16시간 공복 후 첫 끼 사진", "오늘의 다이어트 도시락 인증",
+  "물 500ml 마신 타이밍마다 사진", "밀가루 없는 하루 인증", "아보카도 or 좋은 지방 포함 식사",
+  "물 대신 탄산 NO 인증", "야식 안 먹은 밤 시간 인증", "한 끼는 생식 or 자연식으로 인증",
+  "볶음/튀김 없이 조리한 식사", "마늘 or 양파 포함 식사 사진", "계란 요리 한 가지 공유하기",
+  "채소 비중 높은 식사 인증", "하루 먹은 식단 3컷 모아 올리기", "냉동식품 없는 하루 인증",
+  "먹기 전 식사 전경 예쁘게 찍기", "하루 과일 1회 섭취 인증", "물병 옆에 식사 사진 같이 찍기",
+  "아침 공복 커피 대신 물 인증", "새벽 공복 유지를 위한 빈 접시 인증",
+  "반찬 종류 세지 않고 단순화된 식사", "정해진 그릇에만 밥 담아 먹기",
+  "나만의 다이어트 플레이트 구성 인증", "먹은 양 보여주기 (전/후 사진)", "하루에 먹은 당류 계산 인증"
+];
 
-let controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.enablePan = false;
-controls.minDistance = 5;
-controls.maxDistance = 20;
+let balls = [];
+let isDrawn = false;
 
-camera.position.set(0, 5, 15);
-controls.update();
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-scene.add(ambientLight);
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(5, 10, 7.5);
-scene.add(directionalLight);
-
-const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-const material = new THREE.MeshStandardMaterial({ color: 0xf06292 });
-
-const balls = [];
-for (let i = 0; i < 30; i++) {
-  const ball = new THREE.Mesh(geometry, material);
-  ball.position.set(
-    (Math.random() - 0.5) * 10,
-    (Math.random() - 0.5) * 5,
-    (Math.random() - 0.5) * 10
-  );
-  scene.add(ball);
+function createBall(i) {
+  const ball = document.createElement('div');
+  ball.classList.add('ball');
+  ball.innerText = i + 1;
+  ball.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+  ball.style.top = Math.random() * (window.innerHeight * 0.6 - 60) + 'px';
+  container.appendChild(ball);
   balls.push(ball);
 }
 
-function animate() {
-  requestAnimationFrame(animate);
-  balls.forEach(b => {
-    b.rotation.x += 0.01;
-    b.rotation.y += 0.01;
-    b.position.x += (Math.random() - 0.5) * 0.05;
-    b.position.y += (Math.random() - 0.5) * 0.05;
-    b.position.z += (Math.random() - 0.5) * 0.05;
-  });
-  controls.update();
-  renderer.render(scene, camera);
+function clearBalls() {
+  balls.forEach(ball => container.removeChild(ball));
+  balls = [];
 }
-animate();
 
-const challenges = [
-  "단백질 음식 인증샷 올리기", "물 2L 마시기", "야식 안 먹기", "정제당 없는 하루 보내기",
-  "아침 식사 챙겨 먹기", "채소 3가지 이상 포함 식사", "외식 대신 집밥", "밀가루 없는 하루",
-  "직접 요리한 식사 공유", "탄수화물 제한 식단", "계란 요리 포함 식사", "1일 3식 인증"
-];
+function startLotto() {
+  if (isDrawn) return;
+  isDrawn = true;
 
-const drawBtn = document.getElementById('drawBtn');
-const challengeBox = document.getElementById('challengeBox');
+  clearBalls();
+  mainBall.style.display = 'none';
+  resultBox.innerHTML = '';
 
-drawBtn.onclick = () => {
-  const selected = challenges[Math.floor(Math.random() * challenges.length)];
-  challengeBox.innerText = `🎯 오늘의 챌린지\n“${selected}”`;
-  challengeBox.style.display = 'block';
-};
+  for (let i = 0; i < 20; i++) {
+    createBall(i);
+  }
+
+  setTimeout(() => {
+    clearBalls();
+    const index = Math.floor(Math.random() * challenges.length);
+    const text = challenges[index];
+    mainBall.innerText = text;
+    mainBall.style.display = 'flex';
+    resultBox.innerHTML = `<strong>🍀 오늘의 챌린지:</strong><br>“${text}”`;
+
+    drawBtn.disabled = true;
+    drawBtn.innerText = '✅ 추첨 완료!';
+  }, 3000);
+}

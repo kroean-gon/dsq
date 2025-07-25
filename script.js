@@ -1,7 +1,7 @@
 const container = document.getElementById('ball-container');
 const mainBall = document.getElementById('main-ball');
 const resultBox = document.getElementById('result');
-const drawBtn = document.getElementById('drawBtn'); // 버튼 요소 연결
+const drawBtn = document.getElementById('drawBtn');
 
 const challenges = [
   "주말 외식 대신 만든 식사 한 끼 먹기",
@@ -98,8 +98,8 @@ const challenges = [
   "하루 식단 총평과 함께 BEST 컷 공유하기"
 ];
 
-let balls = [];
 let isDrawn = false;
+let balls = [];
 
 function createBall(i) {
   const ball = document.createElement('div');
@@ -123,6 +123,7 @@ function startLotto() {
   clearBalls();
   mainBall.classList.remove('show');
   resultBox.innerHTML = '';
+  drawBtn.disabled = true;
 
   for (let i = 0; i < 20; i++) {
     createBall(i);
@@ -132,11 +133,12 @@ function startLotto() {
     clearBalls();
     const index = Math.floor(Math.random() * challenges.length);
     const text = challenges[index];
+
     mainBall.innerText = text;
     mainBall.classList.add('show');
     resultBox.innerHTML = `<strong>🌿 오늘의 챌린지:</strong><br>“${text}”`;
 
-    drawBtn.disabled = true;
+    // 확실하게 버튼 문구 변경
     drawBtn.innerText = '✅ 추첨 완료!';
   }, 1500);
 }

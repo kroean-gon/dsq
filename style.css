@@ -1,16 +1,12 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 0 40px 0;  /* 아래쪽 여백 조금 줄임 */
   font-family: 'Arial', sans-serif;
   background: linear-gradient(to bottom, #f0fff0, #ffffff);
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: hidden; /* 세로 스크롤 제거 */
   text-align: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  height: 100vh;  /* 한 화면에 다 보이게 */
 }
 
 h1 {
@@ -19,6 +15,33 @@ h1 {
   color: #2e7d32;
 }
 
+#ball-container {
+  position: relative;
+  width: 100vw;
+  height: 50vh;  /* 약간 줄임 */
+  overflow: hidden;
+}
+
+.ball {
+  width: 60px;
+  height: 60px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(300px, 500px); }
+}
+
+/* 🎯 이거 유지! 대포 발사 애니메이션 */
 #main-ball {
   position: fixed;
   left: 50%;
@@ -43,16 +66,9 @@ h1 {
 }
 
 #main-ball.show {
-  bottom: 50%; /* ✨ 더 위에서 튀어나오게 */
+  bottom: 35%;
   transform: translateX(-50%) translateY(0) scale(1.2);
   opacity: 1;
-}
-
-#result {
-  margin-top: 180px; /* ✅ 공이랑 겹치지 않도록 */
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-  color: #1b5e20;
 }
 
 button {
@@ -63,7 +79,7 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 12px;
+  margin-top: 10px;
 }
 
 button:disabled {
@@ -76,15 +92,9 @@ button:hover:enabled {
   background: #1b5e20;
 }
 
-.challenge-text {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 6px;
-}
-
-.notice {
-  font-size: 0.85rem;
-  margin-top: 4px;
-  font-weight: bold;
+#result {
+  margin-top: 16px;
+  margin-bottom: 30px;  /* 너무 크지 않게 조정 */
+  font-size: 1.1rem;
   color: #1b5e20;
 }

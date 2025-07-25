@@ -134,7 +134,7 @@ function startLotto() {
     const text = challenges[index];
     mainBall.innerText = text;
     mainBall.classList.add('show');
-     resultBox.innerHTML = <strong>🌿 오늘의 챌린지:</strong><br>“${text}”;
+    resultBox.innerHTML = <strong>🌿 오늘의 챌린지:</strong><br>“${text}”;
 
     drawBtn.disabled = true;
     drawBtn.innerText = '✅ 추첨 완료!';
